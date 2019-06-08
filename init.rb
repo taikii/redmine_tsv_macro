@@ -17,7 +17,7 @@ Redmine::Plugin.register :redmine_tsv_macro do
         concat(content_tag(:tbody) do
           text.each_line {|line|
             concat(content_tag(:tr) do
-              line.chomp.split("\t").each {|col|
+              line.chomp.split("\t", -1).each {|col|
                 concat (content_tag(:td) do
                   concat col
                 end)
@@ -39,7 +39,7 @@ Redmine::Plugin.register :redmine_tsv_macro do
       out << content_tag(:table) do
         concat(content_tag(:thead) do
           concat(content_tag(:tr) do
-            text.slice!(/.*$/).chomp.split("\t").each {|col|
+            text.slice!(/.*$/).chomp.split("\t", -1).each {|col|
               concat (content_tag(:th) do
                 concat col
               end)
@@ -50,7 +50,7 @@ Redmine::Plugin.register :redmine_tsv_macro do
           text.each_line.with_index  {|line, index|
             next if index == 0
             concat(content_tag(:tr) do
-              line.chomp.split("\t").each {|col|
+              line.chomp.split("\t", -1).each {|col|
                 concat (content_tag(:td) do
                   concat col
                 end)
